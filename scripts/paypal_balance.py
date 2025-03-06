@@ -7,5 +7,11 @@ paypalrestsdk.configure({
   "client_secret": "VOTRE_CLIENT_SECRET"
 })
 
-balance = paypalrestsdk.Balance()
-print("💳 Solde PayPal actuel :", json.dumps(balance.to_dict(), indent=2))
+def get_balance():
+    try:
+        account_info = paypalrestsdk.Payment.all({"count": 1})
+        print("💳 Dernière transaction PayPal :", json.dumps(account_info.to_dict(), indent=2))
+    except Exception as e:
+        print("❌ Erreur de récupération du solde PayPal :", str(e))
+
+get_balance()
