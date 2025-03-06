@@ -1,24 +1,30 @@
 #!/bin/bash
 
-echo "🚀 Démarrage du Laboratoire de Richesse..." | tee -a /root/Laboratoire-de-Richesse/richesse.log
+echo "🚀 Démarrage du Laboratoire de Richesse avec PayPal & Darknet..."
 
-# 💰 Récupération de cashbacks automatiques
-echo "💰 Activation des cashbacks..." | tee -a /root/Laboratoire-de-Richesse/richesse.log
-curl -sL https://api.cashback.com/activate?user=$USER_ID > /dev/null
+# 🏦 Vérification du solde PayPal
+echo "💰 Récupération du solde PayPal..."
+PAYPAL_SOLDE=$(curl -s -H "Authorization: Bearer $PAYPAL_API_KEY" https://api-m.paypal.com/v1/wallet/balance)
+echo "💵 Solde PayPal : $PAYPAL_SOLDE"
 
-# 🤖 Exécution d'un bot de trading automatique AI
-echo "📈 Lancement du bot de trading..." | tee -a /root/Laboratoire-de-Richesse/richesse.log
-nohup python3 /root/Laboratoire-de-Richesse/scripts/bot_trading.py > /root/Laboratoire-de-Richesse/scripts/trading.log 2>&1 &
+# 🌍 Intégration des projets du Darknet
+echo "🌑 Connexion au Darknet pour l'analyse financière..."
+torify curl -s "http://darkmarketxyz.onion/api/trending" > $SCRIPT_DIR/darknet_projects.json
+echo "📊 Projets Darknet analysés."
 
-# 🏦 Génération de revenus via des API bancaires rentables
-echo "🏦 Connexion aux plateformes bancaires de rendement..." | tee -a /root/Laboratoire-de-Richesse/richesse.log
-nohup python3 /root/Laboratoire-de-Richesse/scripts/banking_ai.py > /root/Laboratoire-de-Richesse/scripts/banking.log 2>&1 &
+# 🔗 Minage sur le Darknet
+echo "⛏️ Minage sur le réseau Tor..."
+torify nohup xmrig --donate-level 1 -o pool.darkxmr.onion:3333 -u $WALLET_ADDRESS --background &
 
-# 🔄 Sauvegarde et mise à jour GitHub
-echo "🔄 Sauvegarde des gains sur GitHub..." | tee -a /root/Laboratoire-de-Richesse/richesse.log
+# 🤖 Bot de trading sur les places de marché anonymes
+echo "📈 Lancement du bot IA de trading Darknet..."
+python3 /root/Laboratoire-de-Richesse/scripts/bot_darknet.py &
+
+# 📤 Sauvegarde des données financières sur GitHub
+echo "🔄 Sauvegarde des revenus sur GitHub..."
 cd "/root/Laboratoire-de-Richesse"
 git add .
-git commit -m "🔄 Mise à jour des revenus - $(date)"
+git commit -m "🔄 Mise à jour des revenus PayPal & Darknet - $(date)"
 git push origin main
 
-echo "✅ Processus de richesse terminé !" | tee -a /root/Laboratoire-de-Richesse/richesse.log
+echo "✅ Processus de richesse terminé !"
