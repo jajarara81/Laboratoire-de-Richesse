@@ -1,0 +1,7 @@
+CLIENT_ID="AZ2-AISZZBLI2P43MA_4NZ..."
+CLIENT_SECRET="Egxed2m15zpywk1jtaiy9oinwyiwpo-hio3wa0lg..."
+PAYPAL_API="https://api-m.paypal.com"
+EMAIL_DESTINATAIRE="ton.email@paypal.com"
+MONTANT="50.00"
+DEVISE="EUR"
+	
